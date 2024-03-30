@@ -2,7 +2,6 @@
   <a href="https://github.com/ELDYmoddys/EC">
     <img src="./EC_logo.svg" alt="EC_Logo" width="100" height="100">
   </a>
-
   <h3 align="center">Welcome to the EC Project!</h3>
 
 </p>
