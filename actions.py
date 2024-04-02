@@ -24,15 +24,31 @@ class Actions:
     
     def transaction(giver: int, reciever: int, amount: float):
 
-        if Actions.fetch_balance(reciever) is not False:
-            pass # WIP!
+        txn_hash = None
+
+        giver_info = Actions.fetch_balance(giver)
+        reciever_info = Actions.fetch_balance(reciever)
+
+        if giver_info is not False and reciever_info is not False:
+            if float(f'0.' + '0'*(DECIMALS-1) + '1'): # checks if the amount sent is within 
+                if giver_info[0] >= amount:
+                    txn_hash = Logger.create_txn_log()
+                    # WIP - need to modify user data here!                
+                else:
+                    fail_case = 'bal_too_low'
+            else:
+                fail_case = 'invalid_amt'
+        else:
+            if giver_info is False:
+                fail_case = 'no_bal_self'
+            elif reciever_info is False:
+                fail_case = 'no_bal_reciever'
+            else:
+                fail_case = 'no_bals'
 
         return txn_hash, fail_case
 
-
-
-
-def read_bals():
+def read_bals(): # gets balance data
 
     df = pd.read_parquet(r'user_info.parquet')
 
