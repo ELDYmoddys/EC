@@ -79,7 +79,7 @@ async def balance(ctx, *uid):
 @commands.cooldown(1, 2, commands.BucketType.user)
 async def pay(ctx, reciever, amount):
 
-    if Actions.fetch_balance(ctx.author.id) != -1:
+    if Actions.fetch_balance(ctx.author.id) is not False:
         reciever = reciever.strip('<@>')
         try:
             reciever = await ctx.bot.fetch_user(reciever)
@@ -91,7 +91,7 @@ async def pay(ctx, reciever, amount):
         txn_hash = None
         fail_case = 'no_bal_self'
 
-    if txn_hash is None:
+    if txn_hash is None: # if transaction fails
         if fail_case == 'invalid_amt':
             embed=discord.Embed(title="Transaction failed!", description=f"The amount you're sending must be **greater**\n**than zero** or **within the lowest accepted**\n**decimal point** of {DECIMALS} points!", color=EMB_COLOUR)
             embed.set_footer(text=f"Please try again, {ctx.author.name}!")
@@ -108,7 +108,7 @@ async def pay(ctx, reciever, amount):
 
 
 def build_embed(emb_type, *extra_info):
-
+    # not useful yet
     pass
 
 client.run('your discord token')
