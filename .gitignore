@@ -1,3 +1,5 @@
 __pycache__/logger.cpython-312.pyc
 testing.py
 testing_surface.py
+user_info.parquet
+txn_log.parquet
