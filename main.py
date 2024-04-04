@@ -5,7 +5,7 @@ from discord.ext import tasks, commands
 from datetime import datetime
 from actions import Actions
 
-PREFIXES = ['!', 'ec!'] # add/change accordingly to your usage
+PREFIXES = ['!', 'ec!'] # add/change/remove accordingly to your usage
 CURRENCY = 'EC' # change to your currency ticker
 COOLDOWN = 2 # cooldown between messages (seconds)
 DECIMALS = 6 # decimal places for your currency (ie. with 6, the smallest division is 0.000001)
@@ -38,7 +38,7 @@ async def create(ctx):
 
     check = Actions.fetch_balance(ctx.author.id)[0]
 
-    if check == -1:
+    if check is not False:
         Actions.create_user()
         await ctx.send(f"`Success!`\nYour account has been created! Run `{PREFIXES[0]}help` for assistance!")
     else:
@@ -72,7 +72,7 @@ async def balance(ctx, *uid):
         embed.add_field(name="☑️ Blocks", value=f"{blocks:,} block(s) mined", inline=False)
         embed.set_footer(text="Bot made with ❤️ by eld_!")
         await ctx.send(embed=embed)
-    elif balance == -1 and len(uid) != 0:
+    elif balance is False and len(uid) != 0:
         await ctx.send(f"`Error!`\nOop! Looks like {user.name} does not have an account.")
 
 @client.command(aliases=['give', 'send'])
@@ -111,4 +111,4 @@ def build_embed(emb_type, *extra_info):
     # not useful yet
     pass
 
-client.run('your discord token')
+client.run('your discord bot token')
