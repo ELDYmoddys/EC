@@ -1,5 +1,5 @@
 import pandas as pd
-from main import DECIMALS
+from config import DECIMALS
 from logger import Logger
 from deltalake.writer import write_deltalake
 
@@ -8,7 +8,8 @@ class Actions:
 
         new_user = [(uid, float(f'0.' + '0'*DECIMALS), 0)]
         df = pd.DataFrame(new_user, columns=['uid', 'balance', 'blocks'])
-        write_deltalake(r'user_info.parquet', df, mode="append")
+        
+        # need a different appending system here
 
         return
         
@@ -62,7 +63,8 @@ def read_bals(): # gets balance data
     return df
 
 def write_bals(df): # takes dataframe and overwrites the balance info
-
-    write_deltalake(r'user_info.parquet', df, mode="overwrite")
+    
+    # THIS NEEDS TO BE REPLACED, ISSUES WITH REWRITING DATA
+    # write_deltalake(r'user_info.parquet', df, mode="overwrite")
 
     return
