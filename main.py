@@ -3,7 +3,7 @@ import asyncio
 
 from discord import app_commands
 from discord.ext import tasks, commands
-from config import PREFIXES, CURRENCY, DECIMALS, EMB_COLOUR, TOKEN
+from config import PREFIXES, CURRENCY, COOLDOWN, DECIMALS, EMB_COLOUR, TOKEN
 from datetime import datetime
 from actions import Actions
 
@@ -23,13 +23,13 @@ async def status_change():
         await asyncio.sleep(20) # time between changes in status (set to 20 seconds)
 
 @client.command()
-@commands.cooldown(1, 2, commands.BucketType.guild)
+@commands.cooldown(1, COOLDOWN, commands.BucketType.guild)
 async def hello(ctx):
     # says hello :D
     await ctx.send(f"Hello, {ctx.author.name}!")
 
 @client.command()
-@commands.cooldown(1, 2, commands.BucketType.guild)
+@commands.cooldown(1, COOLDOWN, commands.BucketType.guild)
 async def create(ctx):
 
     check = Actions.fetch_balance(ctx.author.id)[0]
@@ -41,7 +41,7 @@ async def create(ctx):
         await ctx.send("`Error!`\nYou already have an account!")
 
 @client.command(aliases=['b', 'bal', 'bank', 'wallet'])
-@commands.cooldown(1, 2, commands.BucketType.guild)
+@commands.cooldown(1, COOLDOWN, commands.BucketType.guild)
 async def balance(ctx, *uid):
     
     if len(uid) != 0:
@@ -72,7 +72,7 @@ async def balance(ctx, *uid):
         await ctx.send(f"`Error!`\nOop! Looks like {user.name} does not have an account.")
 
 @client.command(aliases=['give', 'send'])
-@commands.cooldown(1, 2, commands.BucketType.user)
+@commands.cooldown(1, COOLDOWN, commands.BucketType.user)
 async def pay(ctx, reciever, amount):
 
     if Actions.fetch_balance(ctx.author.id) is not False:
