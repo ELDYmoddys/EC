@@ -17,6 +17,6 @@ Thanks!
 
 # What's EC?
 
-EC is a work-in-progress barebones Discord digital currency bot making use of the Python Panda module.
+EC is a work-in-progress barebones Discord digital currency bot making use of the Python Panda module and Parquet storage solutions.
 
 ---
