@@ -11,7 +11,7 @@
 This project is currently a work in progress!
 In it's current state, the bot is missing key features in order to function as intended.
 
-Please stayed tune for updates and completion.  A guide will later be provided *here* when the code is operational!
+Please stay tuned for updates and completion.  A guide will later be provided *here* when the code is operational!
 
 Thanks!
 
